@@ -12,18 +12,25 @@ public class project5main {
 
         public int startTime;
         public int endTime;
-
-        public Duration(int startTime, int endTime){
+        public int profit; 
+        public Duration(int startTime, int endTime, int profit) {
 
             this.startTime = startTime;
             this.endTime = endTime;
+            this.profit = profit;
         }
 
         public int compareTo(Duration d) {
 
             if(this.endTime > d.endTime) return 1;
-            else if(this.endTime == d.endTime) return 0;
-            else return -1;
+            else if(this.endTime < d.endTime) return -1;
+            else {
+                
+                if(this.profit < d.profit) return 1;
+                else if(this.profit > d.profit) return -1;
+            }
+
+            return 0;
         }
 
         public String toString() {
@@ -54,9 +61,9 @@ public class project5main {
 
             if(types[i].equals("s")) {
                 
-                d = new Duration( Integer.parseInt(receivingTime[i]),  Integer.parseInt(receivingTime[i]) + Integer.parseInt(durationsA[i]));
+                d = new Duration( Integer.parseInt(receivingTime[i]),  Integer.parseInt(receivingTime[i]) + Integer.parseInt(durationsA[i]), Integer.parseInt(profits[i]));
                 
-            }else d = new Duration( Integer.parseInt(receivingTime[i]),  Integer.parseInt(receivingTime[i]) + Integer.parseInt(durationsB[i]));
+            }else d = new Duration( Integer.parseInt(receivingTime[i]),  Integer.parseInt(receivingTime[i]) + Integer.parseInt(durationsB[i]), Integer.parseInt(profits[i]));
 
             durations.put(d, Integer.parseInt(profits[i]));
             materials.add(d);
@@ -96,8 +103,8 @@ public class project5main {
             }
         }
     
-        System.out.println(maxProfits[len-1]);
-        System.out.println(durations);
+        out.print(maxProfits[len-1]);
+
         in.close();
         out.close();
     }
